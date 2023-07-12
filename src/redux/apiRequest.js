@@ -21,13 +21,14 @@ import {
     getAllUsersSuccess,
     getAllUsersFailed,
 } from './userSlice';
+import { axiosInstance } from '../axiosInstance';
 
 export const loginUser = async (user, dispatch, navigate) => {
     dispatch(loginStart());
     try {
-        const res = await axios.post('/auth/login', user);
+        const res = await axiosInstance.post('/auth/login', user);
         dispatch(loginSuccess(res.data));
-        navigate('/')
+        navigate('/');
     } catch (err) {
         dispatch(loginFailed());
     }
@@ -36,20 +37,20 @@ export const loginUser = async (user, dispatch, navigate) => {
 export const registerUser = async (user, dispatch, navigate) => {
     dispatch(registerStart());
     try {
-        await axios.post('/auth/register', user);
+        await axiosInstance.post('/auth/register', user);
         dispatch(registerSuccess());
         navigate('/users');
     } catch (err) {
-        console.log(err)
-        dispatch(registerFailed("Somethimg is wrong"));
+        console.log(err);
+        dispatch(registerFailed('Somethimg is wrong'));
     }
-}
+};
 
 export const getAllUsers = async (accessToken, dispatch, axiosJWT) => {
     dispatch(getAllUsersStart());
     try {
         const res = await axiosJWT.get('/user', {
-            headers: { token: `Bearer ${accessToken}`},
+            headers: { token: `Bearer ${accessToken}` },
         });
         dispatch(getAllUsersSuccess(res.data));
     } catch (err) {
@@ -57,12 +58,17 @@ export const getAllUsers = async (accessToken, dispatch, axiosJWT) => {
     }
 };
 
-
-export const logoutUser = async (dispatch, id, navigate, accessToken, axiosJWT) => {
+export const logoutUser = async (
+    dispatch,
+    id,
+    navigate,
+    accessToken,
+    axiosJWT,
+) => {
     dispatch(logoutStart());
     try {
         await axiosJWT.post('/auth/logout', id, {
-            headers: {token: `Bearer ${accessToken}`} ,
+            headers: { token: `Bearer ${accessToken}` },
         });
         dispatch(logoutSuccess());
         localStorage.removeItem('persist:root');
@@ -75,7 +81,7 @@ export const logoutUser = async (dispatch, id, navigate, accessToken, axiosJWT) 
 export const confirmUser = async (user, dispatch, navigate) => {
     dispatch(confirmStart());
     try {
-        const res = await axios.post('/auth/confirmUser', user);
+        const res = await axiosInstance.post('/auth/confirmUser', user);
         dispatch(confirmSuccess(res.data));
         navigate('/login/forgot');
     } catch (err) {
@@ -86,7 +92,7 @@ export const confirmUser = async (user, dispatch, navigate) => {
 export const resetPass = async (user, dispatch, navigate) => {
     dispatch(resetPassStart());
     try {
-        await axios.post('/auth/confirmCode', user);
+        await axiosInstance.post('/auth/confirmCode', user);
         dispatch(resetPassSuccess());
         navigate('/login');
     } catch (err) {

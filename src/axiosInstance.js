@@ -1,7 +1,7 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
     baseURL: 'https://dashboard-jwt-mongodb.onrender.com',
 });
 
