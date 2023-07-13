@@ -30,6 +30,7 @@
     &__menu {
         display: none;
         padding: 0 1rem;
+        cursor: pointer;
         color: var(--txt-color-second);
 
         @include mobile-tablet {

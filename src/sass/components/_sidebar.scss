@@ -35,6 +35,7 @@
         top: 1.5rem;
         right: 1rem;
         display: none;
+        cursor: pointer;
 
         @include mobile-tablet {
             display: block;
