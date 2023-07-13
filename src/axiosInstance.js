@@ -1,13 +1,9 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
-export const axiosInstance = axios.create({
-    baseURL: 'https://dashboard-jwt-mongodb.onrender.com',
-});
-
 const refreshToken = async () => {
     try {
-        const res = await axiosInstance.post('/auth/refresh', {
+        const res = await axios.post('/auth/refresh', {
             withCredentials: true,
         });
         return res.data;
@@ -17,9 +13,7 @@ const refreshToken = async () => {
 };
 
 export const createAxios = (user, dispatch, stateSuccess) => {
-    const newInstance = axios.create({
-        baseURL: 'https://dashboard-jwt-mongodb.onrender.com',
-    });
+    const newInstance = axios.create();
     newInstance.interceptors.request.use(
         async (config) => {
             let date = new Date();

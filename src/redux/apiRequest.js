@@ -1,32 +1,31 @@
 import axios from 'axios';
 import {
-    loginStart,
-    loginSuccess,
-    loginFailed,
-    registerStart,
-    registerSuccess,
-    registerFailed,
-    logoutStart,
-    logoutSuccess,
-    logoutFailed,
+    confirmFailed,
     confirmStart,
     confirmSuccess,
-    confirmFailed,
+    loginFailed,
+    loginStart,
+    loginSuccess,
+    logoutFailed,
+    logoutStart,
+    logoutSuccess,
+    registerFailed,
+    registerStart,
+    registerSuccess,
+    resetPassFailed,
     resetPassStart,
     resetPassSuccess,
-    resetPassFailed,
 } from './authSlice';
 import {
+    getAllUsersFailed,
     getAllUsersStart,
     getAllUsersSuccess,
-    getAllUsersFailed,
 } from './userSlice';
-import { axiosInstance } from '../axiosInstance';
 
 export const loginUser = async (user, dispatch, navigate) => {
     dispatch(loginStart());
     try {
-        const res = await axiosInstance.post('/auth/login', user);
+        const res = await axios.post('/auth/login', user);
         dispatch(loginSuccess(res.data));
         navigate('/');
     } catch (err) {
@@ -37,7 +36,7 @@ export const loginUser = async (user, dispatch, navigate) => {
 export const registerUser = async (user, dispatch, navigate) => {
     dispatch(registerStart());
     try {
-        await axiosInstance.post('/auth/register', user);
+        await axios.post('/auth/register', user);
         dispatch(registerSuccess());
         navigate('/users');
     } catch (err) {
@@ -81,7 +80,7 @@ export const logoutUser = async (
 export const confirmUser = async (user, dispatch, navigate) => {
     dispatch(confirmStart());
     try {
-        const res = await axiosInstance.post('/auth/confirmUser', user);
+        const res = await axios.post('/auth/confirmUser', user);
         dispatch(confirmSuccess(res.data));
         navigate('/login/forgot');
     } catch (err) {
@@ -92,7 +91,7 @@ export const confirmUser = async (user, dispatch, navigate) => {
 export const resetPass = async (user, dispatch, navigate) => {
     dispatch(resetPassStart());
     try {
-        await axiosInstance.post('/auth/confirmCode', user);
+        await axios.post('/auth/confirmCode', user);
         dispatch(resetPassSuccess());
         navigate('/login');
     } catch (err) {

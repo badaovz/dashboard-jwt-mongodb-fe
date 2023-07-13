@@ -30,10 +30,7 @@ const Login = () => {
                 <div className='login__form'>
                     <form className='form-group' onSubmit={handleLogin}>
                         <div className='form-group__item'>
-                            <label
-                                htmlFor='name'
-                                className='form-group__label'
-                            >
+                            <label htmlFor='name' className='form-group__label'>
                                 User name
                             </label>
                             <div className='form-group__input'>
@@ -50,10 +47,7 @@ const Login = () => {
                         </div>
 
                         <div className='form-group__item'>
-                            <label
-                                htmlFor='pass'
-                                className='form-group__label'
-                            >
+                            <label htmlFor='pass' className='form-group__label'>
                                 Password
                             </label>
                             <div className='form-group__input'>
@@ -84,9 +78,7 @@ const Login = () => {
                                 </span>
                             </div>
                             {message && (
-                                <p className='form-group__message'>
-                                    {message}
-                                </p>
+                                <p className='form-group__message'>{message}</p>
                             )}
                         </div>
                         <div className='form-group__more'>
