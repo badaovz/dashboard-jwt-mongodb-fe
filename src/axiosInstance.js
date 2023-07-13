@@ -7,7 +7,7 @@ export const axiosInstance = axios.create({
 
 const refreshToken = async () => {
     try {
-        const res = await axiosInstance.post('/auth/refresh', {
+        const res = await axios.post('/auth/refresh', {
             withCredentials: true,
         });
         return res.data;
